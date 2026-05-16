@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check, Loader2 } from "lucide-react";
 import { EVENTS } from "./Events";
-import { db } from "../../firebase/config.ts";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 type FormData = {
   name: string;
@@ -46,6 +44,8 @@ export function Register() {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      const { db } = await import("../../firebase/config.js");
       await addDoc(collection(db, "registrations"), {
         name: form.name,
         email: form.email,
@@ -58,7 +58,7 @@ export function Register() {
       });
       setSuccess(true);
     } catch (error) {
-      console.error("Registration failed:", error);
+      console.error("Registration error:", error);
       setSubmitError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);

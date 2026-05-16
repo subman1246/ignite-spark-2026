@@ -1,24 +1,17 @@
 // SAITED 2026 — Firebase configuration
-//
-// Setup steps:
-// 1. Go to https://console.firebase.google.com
-// 2. Create (or open) your Firebase project
-// 3. Enable Firestore: Build → Firestore Database → Create database (start in test mode)
-// 4. Add a Web App: Project Settings → Your Apps → </> Web → register app
-// 5. Copy the firebaseConfig object below and replace the placeholder values
-// 6. Your Firestore data will appear under the "registrations" collection
+// Get config from: console.firebase.google.com → Project Settings → Your Apps → Web App → Config
+// Enable Firestore at: Build → Firestore Database → Create Database → Test Mode
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDRShDFZSV2RkXIKnuGv7zEhQQR0-Jy5R4",
-  authDomain: "saited-46254.firebaseapp.com",
-  projectId: "saited-46254",
-  storageBucket: "saited-46254.firebasestorage.app",
-  messagingSenderId: "275142200567",
-  appId: "1:275142200567:web:d54bd39eaba324bdf217f2",
-  measurementId: "G-GZ35ZB0HMW"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
