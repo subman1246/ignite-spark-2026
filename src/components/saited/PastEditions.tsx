@@ -43,7 +43,7 @@ export function PastEditions() {
         >
           <p className="text-xs uppercase tracking-[0.4em] text-cyan-300/80">Archive</p>
           <h2 className="mt-3 text-4xl font-bold md:text-6xl">
-            Past <span class="gradient-text">editions</span>.
+            Past <span className="gradient-text">editions</span>.
           </h2>
         </motion.div>
 
