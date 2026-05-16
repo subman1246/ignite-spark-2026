@@ -7,12 +7,13 @@ import { getFirestore } from 'firebase/firestore';
 // Also enable Firestore at: Build → Firestore Database → Create Database → Test Mode
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDRShDFZSV2RkXIKnuGv7zEhQQR0-Jy5R4",
+  authDomain: "saited-46254.firebaseapp.com",
+  projectId: "saited-46254",
+  storageBucket: "saited-46254.firebasestorage.app",
+  messagingSenderId: "275142200567",
+  appId: "1:275142200567:web:d54bd39eaba324bdf217f2",
+  measurementId: "G-GZ35ZB0HMW",
 };
 
 const app = initializeApp(firebaseConfig);

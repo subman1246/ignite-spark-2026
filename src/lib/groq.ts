@@ -8,7 +8,7 @@ export async function askSAIBot(conversationHistory: GroqMessage[]): Promise<str
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
+      Authorization: "Bearer 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",
     },
     body: JSON.stringify({
       model: "llama3-8b-8192",
