@@ -59,11 +59,30 @@ export function Hero() {
           Innovation Beyond Boundaries
         </motion.p>
 
+        {/* Showcase image */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.65 }}
+          className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl border border-cyan-400/30 shadow-[0_0_50px_rgba(34,211,238,0.2)]"
+        >
+          <div className="relative">
+            <img
+              src="https://source.unsplash.com/1400x500/?science,technology,festival,students"
+              alt="SAITED 2026 — Innovation Beyond Boundaries"
+              className="w-full object-cover opacity-75"
+              style={{ maxHeight: "340px" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#05060f]/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#05060f]/30 via-transparent to-[#05060f]/30" />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-4"
+          transition={{ duration: 0.8, delay: 0.85 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <button
             onClick={() => scrollTo("register")}

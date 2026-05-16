@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { EVENTS } from "./Events";
-
-// TODO: Replace with Firebase Firestore write
-// import { db } from '../../firebase/config';
-// import { collection, addDoc } from 'firebase/firestore';
-// await addDoc(collection(db, 'registrations'), { ...data, timestamp: new Date() });
+import { db } from "../../firebase/config.ts";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 type FormData = {
   name: string;
@@ -32,6 +29,8 @@ export function Register() {
     source: "",
   });
   const [success, setSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const toggleEvent = (title: string) => {
     setForm((f) => ({
@@ -42,11 +41,28 @@ export function Register() {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Replace with Firebase Firestore write
-    console.log("SAITED 2026 registration:", form);
-    setSuccess(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      await addDoc(collection(db, "registrations"), {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        school: form.school,
+        grade: form.grade,
+        events: form.events,
+        source: form.source,
+        timestamp: serverTimestamp(),
+      });
+      setSuccess(true);
+    } catch (error) {
+      console.error("Registration failed:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const input =
@@ -104,7 +120,7 @@ export function Register() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              onSubmit={onSubmit}
+              onSubmit={handleSubmit}
               className="glass-strong mt-12 space-y-6 rounded-2xl p-6 md:p-10"
             >
               <div className="grid gap-5 md:grid-cols-2">
@@ -224,11 +240,29 @@ export function Register() {
                 </div>
               </div>
 
+              {submitError && (
+                <motion.p
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300"
+                >
+                  {submitError}
+                </motion.p>
+              )}
+
               <button
                 type="submit"
-                className="pulse-glow w-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 py-4 text-sm font-semibold uppercase tracking-widest text-[#04121a] transition-transform hover:scale-[1.01]"
+                disabled={isSubmitting}
+                className="pulse-glow flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 py-4 text-sm font-semibold uppercase tracking-widest text-[#04121a] transition-transform hover:scale-[1.01] disabled:opacity-70 disabled:hover:scale-100"
               >
-                Confirm Registration
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Submitting…
+                  </>
+                ) : (
+                  "Confirm Registration"
+                )}
               </button>
             </motion.form>
           )}

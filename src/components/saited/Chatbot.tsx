@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, KeyboardEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, Send, Bot } from "lucide-react";
+import { MessageCircle, X, Send, Bot, Trash2 } from "lucide-react";
+import { askSAIBot, type GroqMessage } from "../../lib/groq";
 
 type Msg = { from: "bot" | "user"; text: string };
 
@@ -35,19 +36,24 @@ const FAQS: { q: string; a: string }[] = [
   },
 ];
 
+const INITIAL_MSG: Msg = {
+  from: "bot",
+  text: "Hi! I'm SAI-Bot 🤖 — ask me anything about SAITED 2026.",
+};
+
 export function Chatbot() {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState<Msg[]>([
-    { from: "bot", text: "Hi! I'm SAI-Bot 🤖 — ask me anything about SAITED 2026." },
-  ]);
+  const [msgs, setMsgs] = useState<Msg[]>([INITIAL_MSG]);
   const [typing, setTyping] = useState(false);
+  const [input, setInput] = useState("");
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [msgs, typing, open]);
 
-  const ask = (q: string) => {
+  const addFaqReply = (q: string) => {
     const found = FAQS.find((f) => f.q === q);
     if (!found) return;
     setMsgs((m) => [...m, { from: "user", text: q }]);
@@ -57,6 +63,37 @@ export function Chatbot() {
       setTyping(false);
     }, 900);
   };
+
+  const sendMessage = async (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || typing) return;
+    setInput("");
+    const updated: Msg[] = [...msgs, { from: "user", text: trimmed }];
+    setMsgs(updated);
+    setTyping(true);
+
+    const context: GroqMessage[] = updated
+      .slice(-6)
+      .map((m) => ({ role: m.from === "user" ? "user" : "assistant", content: m.text }));
+
+    try {
+      const reply = await askSAIBot(context);
+      setMsgs((m) => [...m, { from: "bot", text: reply }]);
+    } catch {
+      setMsgs((m) => [
+        ...m,
+        { from: "bot", text: "Oops! I'm having a moment. Try again shortly 😅" },
+      ]);
+    } finally {
+      setTyping(false);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") sendMessage(input);
+  };
+
+  const clearChat = () => setMsgs([INITIAL_MSG]);
 
   return (
     <>
@@ -85,21 +122,30 @@ export function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="glass-strong fixed bottom-24 right-6 z-50 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border-cyan-400/30 shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+            className="glass-strong fixed bottom-24 right-6 z-50 flex h-[560px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border-cyan-400/30 shadow-[0_0_40px_rgba(34,211,238,0.25)]"
           >
+            {/* Header */}
             <div className="flex items-center gap-3 border-b border-cyan-400/15 bg-[#070a1f]/80 p-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500">
                 <Bot className="h-5 w-5 text-[#04121a]" />
               </div>
-              <div>
+              <div className="flex-1">
                 <div className="text-sm font-semibold text-white">SAI-Bot</div>
                 <div className="flex items-center gap-1.5 text-[10px] text-cyan-300/80">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                   Online · usually replies instantly
                 </div>
               </div>
+              <button
+                onClick={clearChat}
+                title="Clear chat"
+                className="rounded-lg p-1.5 text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
             </div>
 
+            {/* Messages */}
             <div className="flex-1 space-y-3 overflow-y-auto p-4">
               {msgs.map((m, i) => (
                 <motion.div
@@ -136,7 +182,9 @@ export function Chatbot() {
               <div ref={endRef} />
             </div>
 
+            {/* Bottom area */}
             <div className="border-t border-cyan-400/15 bg-[#070a1f]/80 p-3">
+              {/* FAQ quick-replies */}
               <div className="mb-2 text-[10px] uppercase tracking-widest text-white/40">
                 Quick questions
               </div>
@@ -144,16 +192,33 @@ export function Chatbot() {
                 {FAQS.map((f) => (
                   <button
                     key={f.q}
-                    onClick={() => ask(f.q)}
+                    onClick={() => addFaqReply(f.q)}
                     className="rounded-full border border-cyan-400/20 bg-white/5 px-3 py-1.5 text-[11px] text-cyan-100 transition-all hover:border-cyan-400/60 hover:bg-cyan-400/10"
                   >
                     {f.q}
                   </button>
                 ))}
               </div>
-              <div className="mt-3 flex items-center gap-2 rounded-full border border-cyan-400/15 bg-[#05060f] px-3 py-2 text-xs text-white/40">
-                <Send className="h-3.5 w-3.5" />
-                Tap a question above to chat
+
+              {/* Free-text input */}
+              <div className="mt-3 flex items-center gap-2 rounded-full border border-cyan-400/25 bg-[#05060f] px-3 py-1.5 transition-all focus-within:border-cyan-400/70 focus-within:shadow-[0_0_0_2px_rgba(34,211,238,0.12)]">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Type a question…"
+                  disabled={typing}
+                  className="flex-1 bg-transparent text-xs text-white outline-none placeholder-white/30 disabled:opacity-50"
+                />
+                <button
+                  onClick={() => sendMessage(input)}
+                  disabled={!input.trim() || typing}
+                  className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-400 text-[#04121a] transition-all hover:bg-cyan-300 disabled:opacity-30"
+                >
+                  <Send className="h-3 w-3" />
+                </button>
               </div>
             </div>
           </motion.div>

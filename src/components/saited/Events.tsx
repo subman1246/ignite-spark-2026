@@ -1,19 +1,20 @@
 import { motion } from "motion/react";
+import { Link } from "@tanstack/react-router";
 
 export const EVENTS = [
-  { emoji: "🔬", title: "Tech Fair", desc: "Showcase student-built tech projects and prototypes." },
-  { emoji: "✈️", title: "Aeromodelling", desc: "Design and fly your own model aircraft." },
-  { emoji: "💻", title: "CODEx Gaming Lab", desc: "Competitive coding and gaming challenges." },
-  { emoji: "🚀", title: "Start-Up Park", desc: "Pitch your business idea to a live panel." },
-  { emoji: "🏥", title: "Med Talk", desc: "Explore the intersection of science and medicine." },
-  { emoji: "⚡", title: "ENERGIZE", desc: "Energy science workshops and experiments." },
-  { emoji: "🔍", title: "Crime Forensics", desc: "Real-world forensic investigation workshop." },
-  { emoji: "🧮", title: "Math Maze", desc: "High-speed mathematical problem-solving competition." },
-  { emoji: "🎤", title: "Minute Matters", desc: "Fast-paced public speaking challenge." },
-  { emoji: "🎵", title: "Science Serenade", desc: "Where science meets art and music." },
-  { emoji: "🐝", title: "Science Spell Bee", desc: "Science-themed spelling and knowledge bee." },
-  { emoji: "🌟", title: "Eureka", desc: "Open innovation challenge for wild ideas." },
-];
+  { emoji: "🔬", title: "Tech Fair", desc: "Showcase student-built tech projects and prototypes.", slug: "tech-fair" },
+  { emoji: "✈️", title: "Aeromodelling", desc: "Design and fly your own model aircraft.", slug: "aeromodelling" },
+  { emoji: "💻", title: "CODEx Gaming Lab", desc: "Competitive coding and gaming challenges.", slug: "codex-gaming-lab" },
+  { emoji: "🚀", title: "Start-Up Park", desc: "Pitch your business idea to a live panel.", slug: "start-up-park" },
+  { emoji: "🏥", title: "Med Talk", desc: "Explore the intersection of science and medicine.", slug: "med-talk" },
+  { emoji: "⚡", title: "ENERGIZE", desc: "Energy science workshops and experiments.", slug: "energize" },
+  { emoji: "🔍", title: "Crime Forensics", desc: "Real-world forensic investigation workshop.", slug: "crime-forensics" },
+  { emoji: "🧮", title: "Math Maze", desc: "High-speed mathematical problem-solving competition.", slug: "math-maze" },
+  { emoji: "🎤", title: "Minute Matters", desc: "Fast-paced public speaking challenge.", slug: "minute-matters" },
+  { emoji: "🎵", title: "Science Serenade", desc: "Where science meets art and music.", slug: "science-serenade" },
+  { emoji: "🐝", title: "Science Spell Bee", desc: "Science-themed spelling and knowledge bee.", slug: "science-spell-bee" },
+  { emoji: "🌟", title: "Eureka", desc: "Open innovation challenge for wild ideas.", slug: "eureka" },
+] as const;
 
 export function Events() {
   return (
@@ -41,15 +42,19 @@ export function Events() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: (i % 6) * 0.06 }}
               whileHover={{ y: -6 }}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl glass p-6 transition-all duration-300 hover:border-cyan-400/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)]"
             >
-              <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-cyan-400/0 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/30" />
-              <div className="text-4xl">{e.emoji}</div>
-              <h3 className="mt-4 text-xl font-semibold text-white">{e.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">{e.desc}</p>
-              <div className="mt-5 inline-flex items-center gap-1 text-xs uppercase tracking-widest text-cyan-300/70 transition-all group-hover:text-cyan-300">
-                Learn more →
-              </div>
+              <Link
+                to={`/events/${e.slug}`}
+                className="group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl glass p-6 transition-all duration-300 hover:border-cyan-400/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)]"
+              >
+                <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-cyan-400/0 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/30" />
+                <div className="text-4xl">{e.emoji}</div>
+                <h3 className="mt-4 text-xl font-semibold text-white">{e.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">{e.desc}</p>
+                <div className="mt-5 inline-flex items-center gap-1 text-xs uppercase tracking-widest text-cyan-300/70 transition-all group-hover:text-cyan-300">
+                  Learn more →
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

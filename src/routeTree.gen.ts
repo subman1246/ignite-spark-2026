@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsTechFairRouteImport } from './routes/events/tech-fair'
+import { Route as EventsStartUpParkRouteImport } from './routes/events/start-up-park'
+import { Route as EventsScienceSpellBeeRouteImport } from './routes/events/science-spell-bee'
+import { Route as EventsScienceSerenadeRouteImport } from './routes/events/science-serenade'
+import { Route as EventsMinuteMattersRouteImport } from './routes/events/minute-matters'
+import { Route as EventsMedTalkRouteImport } from './routes/events/med-talk'
+import { Route as EventsMathMazeRouteImport } from './routes/events/math-maze'
+import { Route as EventsEurekaRouteImport } from './routes/events/eureka'
+import { Route as EventsEnergizeRouteImport } from './routes/events/energize'
+import { Route as EventsCrimeForensicsRouteImport } from './routes/events/crime-forensics'
+import { Route as EventsCodexGamingLabRouteImport } from './routes/events/codex-gaming-lab'
+import { Route as EventsAeromodellingRouteImport } from './routes/events/aeromodelling'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsTechFairRoute = EventsTechFairRouteImport.update({
+  id: '/events/tech-fair',
+  path: '/events/tech-fair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsStartUpParkRoute = EventsStartUpParkRouteImport.update({
+  id: '/events/start-up-park',
+  path: '/events/start-up-park',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsScienceSpellBeeRoute = EventsScienceSpellBeeRouteImport.update({
+  id: '/events/science-spell-bee',
+  path: '/events/science-spell-bee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsScienceSerenadeRoute = EventsScienceSerenadeRouteImport.update({
+  id: '/events/science-serenade',
+  path: '/events/science-serenade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsMinuteMattersRoute = EventsMinuteMattersRouteImport.update({
+  id: '/events/minute-matters',
+  path: '/events/minute-matters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsMedTalkRoute = EventsMedTalkRouteImport.update({
+  id: '/events/med-talk',
+  path: '/events/med-talk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsMathMazeRoute = EventsMathMazeRouteImport.update({
+  id: '/events/math-maze',
+  path: '/events/math-maze',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEurekaRoute = EventsEurekaRouteImport.update({
+  id: '/events/eureka',
+  path: '/events/eureka',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEnergizeRoute = EventsEnergizeRouteImport.update({
+  id: '/events/energize',
+  path: '/events/energize',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsCrimeForensicsRoute = EventsCrimeForensicsRouteImport.update({
+  id: '/events/crime-forensics',
+  path: '/events/crime-forensics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsCodexGamingLabRoute = EventsCodexGamingLabRouteImport.update({
+  id: '/events/codex-gaming-lab',
+  path: '/events/codex-gaming-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsAeromodellingRoute = EventsAeromodellingRouteImport.update({
+  id: '/events/aeromodelling',
+  path: '/events/aeromodelling',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/events/aeromodelling': typeof EventsAeromodellingRoute
+  '/events/codex-gaming-lab': typeof EventsCodexGamingLabRoute
+  '/events/crime-forensics': typeof EventsCrimeForensicsRoute
+  '/events/energize': typeof EventsEnergizeRoute
+  '/events/eureka': typeof EventsEurekaRoute
+  '/events/math-maze': typeof EventsMathMazeRoute
+  '/events/med-talk': typeof EventsMedTalkRoute
+  '/events/minute-matters': typeof EventsMinuteMattersRoute
+  '/events/science-serenade': typeof EventsScienceSerenadeRoute
+  '/events/science-spell-bee': typeof EventsScienceSpellBeeRoute
+  '/events/start-up-park': typeof EventsStartUpParkRoute
+  '/events/tech-fair': typeof EventsTechFairRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/events/aeromodelling': typeof EventsAeromodellingRoute
+  '/events/codex-gaming-lab': typeof EventsCodexGamingLabRoute
+  '/events/crime-forensics': typeof EventsCrimeForensicsRoute
+  '/events/energize': typeof EventsEnergizeRoute
+  '/events/eureka': typeof EventsEurekaRoute
+  '/events/math-maze': typeof EventsMathMazeRoute
+  '/events/med-talk': typeof EventsMedTalkRoute
+  '/events/minute-matters': typeof EventsMinuteMattersRoute
+  '/events/science-serenade': typeof EventsScienceSerenadeRoute
+  '/events/science-spell-bee': typeof EventsScienceSpellBeeRoute
+  '/events/start-up-park': typeof EventsStartUpParkRoute
+  '/events/tech-fair': typeof EventsTechFairRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/events/aeromodelling': typeof EventsAeromodellingRoute
+  '/events/codex-gaming-lab': typeof EventsCodexGamingLabRoute
+  '/events/crime-forensics': typeof EventsCrimeForensicsRoute
+  '/events/energize': typeof EventsEnergizeRoute
+  '/events/eureka': typeof EventsEurekaRoute
+  '/events/math-maze': typeof EventsMathMazeRoute
+  '/events/med-talk': typeof EventsMedTalkRoute
+  '/events/minute-matters': typeof EventsMinuteMattersRoute
+  '/events/science-serenade': typeof EventsScienceSerenadeRoute
+  '/events/science-spell-bee': typeof EventsScienceSpellBeeRoute
+  '/events/start-up-park': typeof EventsStartUpParkRoute
+  '/events/tech-fair': typeof EventsTechFairRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/events/aeromodelling'
+    | '/events/codex-gaming-lab'
+    | '/events/crime-forensics'
+    | '/events/energize'
+    | '/events/eureka'
+    | '/events/math-maze'
+    | '/events/med-talk'
+    | '/events/minute-matters'
+    | '/events/science-serenade'
+    | '/events/science-spell-bee'
+    | '/events/start-up-park'
+    | '/events/tech-fair'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/events/aeromodelling'
+    | '/events/codex-gaming-lab'
+    | '/events/crime-forensics'
+    | '/events/energize'
+    | '/events/eureka'
+    | '/events/math-maze'
+    | '/events/med-talk'
+    | '/events/minute-matters'
+    | '/events/science-serenade'
+    | '/events/science-spell-bee'
+    | '/events/start-up-park'
+    | '/events/tech-fair'
+  id:
+    | '__root__'
+    | '/'
+    | '/events/aeromodelling'
+    | '/events/codex-gaming-lab'
+    | '/events/crime-forensics'
+    | '/events/energize'
+    | '/events/eureka'
+    | '/events/math-maze'
+    | '/events/med-talk'
+    | '/events/minute-matters'
+    | '/events/science-serenade'
+    | '/events/science-spell-bee'
+    | '/events/start-up-park'
+    | '/events/tech-fair'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EventsAeromodellingRoute: typeof EventsAeromodellingRoute
+  EventsCodexGamingLabRoute: typeof EventsCodexGamingLabRoute
+  EventsCrimeForensicsRoute: typeof EventsCrimeForensicsRoute
+  EventsEnergizeRoute: typeof EventsEnergizeRoute
+  EventsEurekaRoute: typeof EventsEurekaRoute
+  EventsMathMazeRoute: typeof EventsMathMazeRoute
+  EventsMedTalkRoute: typeof EventsMedTalkRoute
+  EventsMinuteMattersRoute: typeof EventsMinuteMattersRoute
+  EventsScienceSerenadeRoute: typeof EventsScienceSerenadeRoute
+  EventsScienceSpellBeeRoute: typeof EventsScienceSpellBeeRoute
+  EventsStartUpParkRoute: typeof EventsStartUpParkRoute
+  EventsTechFairRoute: typeof EventsTechFairRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,12 +208,118 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/tech-fair': {
+      id: '/events/tech-fair'
+      path: '/events/tech-fair'
+      fullPath: '/events/tech-fair'
+      preLoaderRoute: typeof EventsTechFairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/start-up-park': {
+      id: '/events/start-up-park'
+      path: '/events/start-up-park'
+      fullPath: '/events/start-up-park'
+      preLoaderRoute: typeof EventsStartUpParkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/science-spell-bee': {
+      id: '/events/science-spell-bee'
+      path: '/events/science-spell-bee'
+      fullPath: '/events/science-spell-bee'
+      preLoaderRoute: typeof EventsScienceSpellBeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/science-serenade': {
+      id: '/events/science-serenade'
+      path: '/events/science-serenade'
+      fullPath: '/events/science-serenade'
+      preLoaderRoute: typeof EventsScienceSerenadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/minute-matters': {
+      id: '/events/minute-matters'
+      path: '/events/minute-matters'
+      fullPath: '/events/minute-matters'
+      preLoaderRoute: typeof EventsMinuteMattersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/med-talk': {
+      id: '/events/med-talk'
+      path: '/events/med-talk'
+      fullPath: '/events/med-talk'
+      preLoaderRoute: typeof EventsMedTalkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/math-maze': {
+      id: '/events/math-maze'
+      path: '/events/math-maze'
+      fullPath: '/events/math-maze'
+      preLoaderRoute: typeof EventsMathMazeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/eureka': {
+      id: '/events/eureka'
+      path: '/events/eureka'
+      fullPath: '/events/eureka'
+      preLoaderRoute: typeof EventsEurekaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/energize': {
+      id: '/events/energize'
+      path: '/events/energize'
+      fullPath: '/events/energize'
+      preLoaderRoute: typeof EventsEnergizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/crime-forensics': {
+      id: '/events/crime-forensics'
+      path: '/events/crime-forensics'
+      fullPath: '/events/crime-forensics'
+      preLoaderRoute: typeof EventsCrimeForensicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/codex-gaming-lab': {
+      id: '/events/codex-gaming-lab'
+      path: '/events/codex-gaming-lab'
+      fullPath: '/events/codex-gaming-lab'
+      preLoaderRoute: typeof EventsCodexGamingLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/aeromodelling': {
+      id: '/events/aeromodelling'
+      path: '/events/aeromodelling'
+      fullPath: '/events/aeromodelling'
+      preLoaderRoute: typeof EventsAeromodellingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EventsAeromodellingRoute: EventsAeromodellingRoute,
+  EventsCodexGamingLabRoute: EventsCodexGamingLabRoute,
+  EventsCrimeForensicsRoute: EventsCrimeForensicsRoute,
+  EventsEnergizeRoute: EventsEnergizeRoute,
+  EventsEurekaRoute: EventsEurekaRoute,
+  EventsMathMazeRoute: EventsMathMazeRoute,
+  EventsMedTalkRoute: EventsMedTalkRoute,
+  EventsMinuteMattersRoute: EventsMinuteMattersRoute,
+  EventsScienceSerenadeRoute: EventsScienceSerenadeRoute,
+  EventsScienceSpellBeeRoute: EventsScienceSpellBeeRoute,
+  EventsStartUpParkRoute: EventsStartUpParkRoute,
+  EventsTechFairRoute: EventsTechFairRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

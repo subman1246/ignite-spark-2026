@@ -8,8 +8,8 @@
 // 5. Copy the firebaseConfig object below and replace the placeholder values
 // 6. Your Firestore data will appear under the "registrations" collection
 
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRShDFZSV2RkXIKnuGv7zEhQQR0-Jy5R4",
